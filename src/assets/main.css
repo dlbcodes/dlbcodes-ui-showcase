@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "@dlbcodes/my-design-system/tokens.css";
+@source "../../node_modules/@dlbcodes/my-design-system/dist";
+
+/* ─── Brand themes — each overrides semantic/brand tokens ─── */
+
+:root,
+[data-theme="lattice"] {
+    --color-brand-100: oklch(55% 0.15 265);
+    --color-brand-200: oklch(62% 0.16 265);
+}
+
+[data-theme="ember"] {
+    --color-brand-100: oklch(60% 0.16 45);
+    --color-brand-200: oklch(67% 0.15 45);
+}
+
+[data-theme="pine"] {
+    --color-brand-100: oklch(50% 0.11 155);
+    --color-brand-200: oklch(57% 0.12 155);
+}
+
+html,
+body,
+#app {
+    min-height: 100vh;
+}
