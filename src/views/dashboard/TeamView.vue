@@ -27,6 +27,7 @@ import {
     PhUserGear,
     PhTrash,
     PhPlus,
+    PhDotsThree,
 } from "@phosphor-icons/vue";
 
 interface Member {
@@ -43,7 +44,7 @@ const members = ref<Member[]>([
         id: "1",
         name: "Daniel Lobo",
         email: "daniel@example.com",
-        src: "https://i.pravatar.cc/120?img=2",
+        src: null,
         role: "Admin",
         status: "Active",
     },
@@ -51,7 +52,7 @@ const members = ref<Member[]>([
         id: "2",
         name: "Ana Silva",
         email: "ana@example.com",
-        src: "https://i.pravatar.cc/120?img=2",
+        src: null,
         role: "Member",
         status: "Active",
     },
@@ -59,7 +60,7 @@ const members = ref<Member[]>([
         id: "3",
         name: "John Carter",
         email: "john@example.com",
-        src: "https://i.pravatar.cc/120?img=2",
+        src: null,
         role: "Member",
         status: "Invited",
     },
@@ -96,20 +97,14 @@ const teamOptions = [
 </script>
 
 <template>
-    <div class="flex flex-col gap-6">
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-semibold text-text-primary">Team</h1>
-                <p class="mt-1 text-sm text-text-secondary">
-                    Manage your team members and their roles.
-                </p>
-            </div>
-            <Button variant="primary" @click="inviteOpen = true">
-                <PhPlus class="size-4" />
-                Invite member
-            </Button>
-        </div>
+    <!-- Page action teleported into the layout's sticky title bar -->
+    <Teleport defer to="#page-actions">
+        <Button variant="primary" size="sm" @click="inviteOpen = true">
+            <PhPlus class="size-4" /> Invite member
+        </Button>
+    </Teleport>
 
+    <div class="flex flex-col gap-6">
         <!-- Members list (hand-built rows + tokens; no Table component) -->
         <Panel class="overflow-visible">
             <PanelContent class="overflow-visible">
@@ -148,11 +143,12 @@ const teamOptions = [
                     <Dropdown placement="bottom-end">
                         <DropdownTrigger>
                             <Button
-                                variant="ghost"
+                                variant="secondary"
                                 size="icon-sm"
                                 aria-label="Member actions"
-                                >⋯</Button
                             >
+                                <PhDotsThree class="size-4" />
+                            </Button>
                         </DropdownTrigger>
                         <DropdownContent size="xs">
                             <DropdownItem>
@@ -163,7 +159,7 @@ const teamOptions = [
                                 <PhUserGear class="size-4" />
                                 Change role
                             </DropdownItem>
-                            <DropdownItem @select="askRemove(member)">
+                            <DropdownItem @click="askRemove(member)">
                                 <PhTrash class="size-4" />
                                 Remove
                             </DropdownItem>
@@ -184,7 +180,7 @@ const teamOptions = [
                 <ModalClose />
             </ModalHeader>
             <ModalFooter>
-                <Button variant="ghost" @click="removeOpen = false"
+                <Button variant="secondary" @click="removeOpen = false"
                     >Cancel</Button
                 >
                 <Button variant="destructive" @click="confirmRemove"
@@ -233,7 +229,7 @@ const teamOptions = [
                 </MultiSelect>
             </ModalContent>
             <ModalFooter>
-                <Button variant="ghost" @click="inviteOpen = false"
+                <Button variant="secondary" @click="inviteOpen = false"
                     >Cancel</Button
                 >
                 <Button variant="primary" @click="inviteOpen = false"

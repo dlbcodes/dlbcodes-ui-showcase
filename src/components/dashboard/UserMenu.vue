@@ -18,7 +18,11 @@ import { currentUser } from "../../data/mock";
                 type="button"
                 class="flex w-full items-center gap-2 rounded-lg p-2 text-left transition-colors hover:bg-bg-subtle"
             >
-                <Avatar :name="currentUser.name" :src="null" size="sm" />
+                <Avatar
+                    :name="currentUser.name"
+                    :src="currentUser.img"
+                    size="sm"
+                />
                 <span class="flex min-w-0 flex-1 flex-col">
                     <span
                         class="truncate text-sm font-medium text-text-primary"

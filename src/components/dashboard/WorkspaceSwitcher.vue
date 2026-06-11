@@ -34,7 +34,7 @@ const planVariant = (
         <PopoverTrigger class="w-full">
             <button
                 type="button"
-                class="flex w-full items-center bg-white border-border-strong justify-between gap-2 rounded-lg p-2 text-left transition-colors hover:bg-bg-subtle"
+                class="flex w-full items-center bg-white border border-border-default rounded-lg justify-between gap-2 p-2 text-left transition-colors hover:bg-bg-subtle"
             >
                 <span class="flex min-w-0 items-center gap-2">
                     <Avatar :name="active.name" :src="null" size="sm" />

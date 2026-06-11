@@ -41,12 +41,12 @@ const betaFeatures = ref(false);
 
 <template>
     <div class="flex flex-col gap-6">
-        <div>
+        <!-- <div>
             <h1 class="text-2xl font-semibold text-text-primary">Account</h1>
             <p class="mt-1 text-sm text-text-secondary">
                 Manage your account across these sections.
             </p>
-        </div>
+        </div> -->
 
         <Tabs class="max-w-3xl">
             <TabsList>
