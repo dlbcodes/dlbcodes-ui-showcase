@@ -1,6 +1,7 @@
 import { ref, watch } from "vue";
 
-export type Theme = "lattice" | "ember" | "pine";
+export type Theme = "lattice" | "slate" | "zinc";
+
 
 export interface BrandInfo {
 	name: string;
@@ -9,8 +10,8 @@ export interface BrandInfo {
 
 const THEMES: Record<Theme, BrandInfo> = {
 	lattice: { name: "Lattice", tagline: "Structure for ambitious teams." },
-	ember: { name: "Ember", tagline: "Move fast, stay warm." },
-	pine: { name: "Pine", tagline: "Calm, focused work." },
+	slate: { name: "Slate", tagline: "Clarity in every detail." },
+	zinc: { name: "Zinc", tagline: "Simple. Sharp. Focused." },
 };
 
 const current = ref<Theme>("lattice");

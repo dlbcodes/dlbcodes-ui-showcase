@@ -2,22 +2,68 @@
 @import "@dlbcodes/my-design-system/tokens.css";
 @source "../../node_modules/@dlbcodes/my-design-system/dist";
 
-/* ─── Brand themes — each overrides semantic/brand tokens ─── */
+/* ════════════════════════════════════════════════════════════════
+   Brand themes — each overrides semantic tokens via [data-theme].
+   Theme 1 (Lattice) keeps the design system's default neutrals and
+   only sets the brand accent. Themes 2–3 reshape the whole neutral
+   character (backgrounds, text, borders) to feel like different apps.
+   ════════════════════════════════════════════════════════════════ */
 
+/* ─── Lattice — the default (warm neutrals), indigo accent ─── */
+/* ─── Lattice — your default (warm), indigo accent ─── */
 :root,
 [data-theme="lattice"] {
     --color-brand-100: oklch(55% 0.15 265);
     --color-brand-200: oklch(62% 0.16 265);
 }
 
-[data-theme="ember"] {
-    --color-brand-100: oklch(60% 0.16 45);
-    --color-brand-200: oklch(67% 0.15 45);
+/* ─── Zinc — shadcn's cool-gray base; near monochrome ─── */
+[data-theme="zinc"] {
+    --color-bg-base: oklch(1 0 0);
+    --color-bg-surface: oklch(0.985 0 0);
+    --color-bg-raised: oklch(1 0 0);
+    --color-bg-elevated: oklch(0.97 0 0);
+    --color-bg-subtle: oklch(0.967 0.001 286); /* zinc's faint blue tint */
+    --color-bg-strong: oklch(0.87 0.002 286);
+    --color-bg-inverse: oklch(0.21 0.006 286);
+
+    --color-text-primary: oklch(0.21 0.006 286);
+    --color-text-secondary: oklch(0.45 0.004 286);
+    --color-text-tertiary: oklch(0.55 0.004 286);
+    --color-text-disabled: oklch(0.8 0.002 286);
+    --color-text-inverse: oklch(0.985 0 0);
+
+    --color-border-subtle: oklch(0.92 0.002 286);
+    --color-border-default: oklch(0.9 0.003 286);
+    --color-border-strong: oklch(0.8 0.004 286);
+
+    /* shadcn-style near-black primary */
+    --color-brand-100: oklch(0.27 0.006 286);
+    --color-brand-200: oklch(0.21 0.006 286);
 }
 
-[data-theme="pine"] {
-    --color-brand-100: oklch(50% 0.11 155);
-    --color-brand-200: oklch(57% 0.12 155);
+/* ─── Slate — strong blue-gray neutrals, blue accent ─── */
+[data-theme="slate"] {
+    --color-bg-base: oklch(1 0 0);
+    --color-bg-surface: oklch(0.984 0.003 248);
+    --color-bg-raised: oklch(1 0 0);
+    --color-bg-elevated: oklch(0.968 0.005 248);
+    --color-bg-subtle: oklch(0.953 0.007 248);
+    --color-bg-strong: oklch(0.85 0.012 248);
+    --color-bg-inverse: oklch(0.21 0.04 257);
+
+    --color-text-primary: oklch(0.21 0.04 257);
+    --color-text-secondary: oklch(0.45 0.03 257);
+    --color-text-tertiary: oklch(0.55 0.025 257);
+    --color-text-disabled: oklch(0.8 0.015 255);
+    --color-text-inverse: oklch(0.984 0.003 248);
+
+    --color-border-subtle: oklch(0.929 0.01 256);
+    --color-border-default: oklch(0.9 0.012 256);
+    --color-border-strong: oklch(0.8 0.015 256);
+
+    --color-brand-100: oklch(0.52 0.16 250);
+    --color-brand-200: oklch(0.58 0.17 250);
 }
 
 html,
