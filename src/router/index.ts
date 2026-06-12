@@ -30,6 +30,7 @@ export const router = createRouter({
 				{ path: "", name: "dashboard", component: () => import("../views/dashboard/OverviewView.vue"), meta: { title: "Overview" } },
 				{ path: "team", name: "dashboard-team", component: () => import("../views/dashboard/TeamView.vue"), meta: { title: "Team" } },
 				{ path: "settings", name: "dashboard-settings", component: () => import("../views/dashboard/SettingsView.vue"), meta: { title: "Settings" } },
+				{ path: "projects", name: "dashboard-projects", component: () => import("../views/dashboard/ProjectsView.vue"), meta: { title: "Projects" } },
 			],
 		},
 	],

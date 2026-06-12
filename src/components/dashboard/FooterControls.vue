@@ -1,26 +1,28 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
 import {
     Dropdown,
     DropdownTrigger,
     DropdownContent,
     DropdownItem,
-    Avatar,
+    Button,
 } from "@dlbcodes/my-design-system";
-import { PhSquaresFour, PhGear, PhSignOut } from "@phosphor-icons/vue";
-import { currentUser } from "../../data/mock";
+import { PhUser, PhGear, PhSignOut, PhQuestion } from "@phosphor-icons/vue";
 </script>
 
 <template>
     <Dropdown>
         <DropdownTrigger>
-            <Avatar :name="currentUser.name" :src="currentUser.img" size="sm" />
+            <Button
+                variant="secondary"
+                size="icon-sm"
+                aria-label="Footer actions"
+            >
+                <PhQuestion class="size-6" />
+            </Button>
         </DropdownTrigger>
         <DropdownContent size="3xs">
-            <RouterLink to="/dashboard">
-                <DropdownItem
-                    ><PhSquaresFour class="size-4" /> Overview</DropdownItem
-                >
+            <RouterLink to="/dashboard/settings">
+                <DropdownItem><PhUser class="size-4" /> Profile</DropdownItem>
             </RouterLink>
             <RouterLink to="/dashboard/settings">
                 <DropdownItem><PhGear class="size-4" /> Settings</DropdownItem>

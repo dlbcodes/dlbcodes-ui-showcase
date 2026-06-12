@@ -14,7 +14,9 @@ const tagline = computed(() => brand().tagline);
         <div
             class="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-brand-200 p-12 lg:flex"
         >
-            <BrandMark class="[&_span]:text-white" />
+            <RouterLink to="/">
+                <BrandMark class="[&_span]:text-white" />
+            </RouterLink>
             <div>
                 <p
                     class="max-w-md text-3xl font-semibold leading-tight text-white"

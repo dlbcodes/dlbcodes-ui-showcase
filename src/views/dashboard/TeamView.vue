@@ -44,7 +44,7 @@ const members = ref<Member[]>([
         id: "1",
         name: "Daniel Lobo",
         email: "daniel@example.com",
-        src: null,
+        src: "https://i.pravatar.cc/120?img=2",
         role: "Admin",
         status: "Active",
     },
@@ -52,7 +52,7 @@ const members = ref<Member[]>([
         id: "2",
         name: "Ana Silva",
         email: "ana@example.com",
-        src: null,
+        src: "https://i.pravatar.cc/120?img=6",
         role: "Member",
         status: "Active",
     },
@@ -60,7 +60,7 @@ const members = ref<Member[]>([
         id: "3",
         name: "John Carter",
         email: "john@example.com",
-        src: null,
+        src: "https://i.pravatar.cc/120?img=3",
         role: "Member",
         status: "Invited",
     },
@@ -170,7 +170,7 @@ const teamOptions = [
         </Panel>
 
         <!-- Remove confirmation -->
-        <Modal v-model="removeOpen" size="sm">
+        <Modal v-model="removeOpen" size="lg">
             <ModalHeader>
                 <ModalTitle>Remove member</ModalTitle>
                 <ModalDescription>
@@ -190,7 +190,7 @@ const teamOptions = [
         </Modal>
 
         <!-- Invite modal with MultiSelect -->
-        <Modal v-model="inviteOpen" size="md">
+        <Modal v-model="inviteOpen" size="lg">
             <ModalHeader>
                 <ModalTitle>Invite a member</ModalTitle>
                 <ModalDescription

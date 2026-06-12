@@ -72,14 +72,19 @@ const remember = ref(false);
                 >
                     <Checkbox v-model="remember" /> Remember me
                 </Label>
-                <a href="#" class="text-sm text-brand-200 hover:underline"
-                    >Forgot password?</a
-                >
+
+                <a href="#" class="text-sm text-brand-200 hover:underline">
+                    Forgot password?
+                </a>
             </div>
 
-            <Button variant="primary" class="w-full justify-center"
-                >Sign in</Button
+            <Button
+                to="/dashboard"
+                variant="primary"
+                class="w-full justify-center"
             >
+                Sign in
+            </Button>
         </div>
 
         <p class="text-center text-sm text-text-secondary">

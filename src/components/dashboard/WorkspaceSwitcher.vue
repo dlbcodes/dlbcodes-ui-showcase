@@ -7,6 +7,19 @@ import {
     Avatar,
     Badge,
     Kbd,
+    Modal,
+    ModalHeader,
+    ModalTitle,
+    ModalDescription,
+    ModalContent,
+    ModalFooter,
+    ModalClose,
+    Field,
+    FieldLabel,
+    FieldContent,
+    Input,
+    Button,
+    Separator,
 } from "@dlbcodes/my-design-system";
 import { PhCaretUpDown, PhCheck, PhPlus, PhGear } from "@phosphor-icons/vue";
 import { workspaces, type Workspace } from "../../data/mock";
@@ -27,6 +40,21 @@ const planVariant = (
     if (plan === "Pro") return "success";
     return "neutral";
 };
+
+// Workspace settings modal
+const settingsOpen = ref(false);
+const workspaceName = ref(active.value.name);
+
+const openSettings = (close: () => void): void => {
+    workspaceName.value = active.value.name;
+    close(); // close the popover
+    settingsOpen.value = true; // open the modal
+};
+
+const saveSettings = (): void => {
+    active.value = { ...active.value, name: workspaceName.value };
+    settingsOpen.value = false;
+};
 </script>
 
 <template>
@@ -34,7 +62,7 @@ const planVariant = (
         <PopoverTrigger class="w-full">
             <button
                 type="button"
-                class="flex w-full items-center bg-white border border-border-default rounded-lg justify-between gap-2 p-2 text-left transition-colors hover:bg-bg-subtle"
+                class="flex w-full items-center justify-between gap-2 rounded-xl border border-border-default bg-white px-2 py-3 text-left transition-colors hover:bg-bg-subtle"
             >
                 <span class="flex min-w-0 items-center gap-2">
                     <Avatar :name="active.name" :src="null" size="sm" />
@@ -83,24 +111,70 @@ const planVariant = (
                         <Kbd v-else>⌘{{ i + 1 }}</Kbd>
                     </button>
 
-                    <div class="my-1 h-px bg-border-subtle"></div>
+                    <Separator />
 
                     <button
                         type="button"
                         class="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm text-text-primary transition-colors hover:bg-bg-surface"
                         @click="close"
                     >
-                        <PhPlus class="size-4" /> Create workspace
+                        <PhPlus class="size-4" />
+                        Create workspace
                     </button>
                     <button
                         type="button"
                         class="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm text-text-primary transition-colors hover:bg-bg-surface"
-                        @click="close"
+                        @click="openSettings(close)"
                     >
-                        <PhGear class="size-4" /> Workspace settings
+                        <PhGear class="size-4" />
+                        Workspace settings
                     </button>
                 </div>
             </template>
         </PopoverContent>
     </Popover>
+
+    <!-- Modal lives OUTSIDE the popover, at the component root -->
+    <Modal v-model="settingsOpen" size="xl">
+        <ModalHeader>
+            <ModalTitle>Workspace settings</ModalTitle>
+            <ModalDescription>Update your workspace details.</ModalDescription>
+            <ModalClose />
+        </ModalHeader>
+        <ModalContent>
+            <div class="flex flex-col gap-4">
+                <Field>
+                    <FieldLabel>Workspace name</FieldLabel>
+                    <FieldContent>
+                        <Input
+                            v-model="workspaceName"
+                            variant="contrast"
+                            placeholder="Workspace name"
+                        />
+                    </FieldContent>
+                </Field>
+                <Field>
+                    <FieldLabel>Plan</FieldLabel>
+                    <FieldContent>
+                        <div class="flex items-center gap-2">
+                            <Badge :variant="planVariant(active.plan)">{{
+                                active.plan
+                            }}</Badge>
+                            <span class="text-sm text-text-secondary"
+                                >Manage billing to change your plan.</span
+                            >
+                        </div>
+                    </FieldContent>
+                </Field>
+            </div>
+        </ModalContent>
+        <ModalFooter>
+            <Button variant="secondary" @click="settingsOpen = false"
+                >Cancel</Button
+            >
+            <Button variant="primary" @click="saveSettings"
+                >Save changes</Button
+            >
+        </ModalFooter>
+    </Modal>
 </template>
