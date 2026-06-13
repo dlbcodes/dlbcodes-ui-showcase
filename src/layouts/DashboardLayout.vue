@@ -48,7 +48,7 @@ const nav = [
 
 <template>
     <SidebarProvider>
-        <div class="flex h-screen w-screen overflow-hidden bg-bg-surface">
+        <div class="flex h-dvh w-full overflow-hidden bg-bg-surface">
             <Sidebar class="border-none">
                 <SidebarHeader
                     class="flex w-full flex-col items-start gap-y-4 px-2"
@@ -107,7 +107,7 @@ const nav = [
                     ></div>
                 </header>
 
-                <div class="px-8 pt-8 pb-8">
+                <div class="p-4 md:px-8 pt-8 pb-8">
                     <router-view />
                 </div>
             </main>

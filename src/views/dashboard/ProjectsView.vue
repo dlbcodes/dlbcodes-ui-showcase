@@ -50,7 +50,7 @@ const memberOptions = [
 const resetForm = (): void => {
     name.value = "";
     description.value = "";
-    visibility.value = "private";
+    visibility.value = "";
     teamMembers.value = [];
 };
 

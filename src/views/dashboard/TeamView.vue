@@ -1,43 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-    Panel,
-    PanelContent,
-    Avatar,
-    Badge,
-    Button,
-    Dropdown,
-    DropdownTrigger,
-    DropdownContent,
-    DropdownItem,
-    Modal,
-    ModalHeader,
-    ModalTitle,
-    ModalDescription,
-    ModalContent,
-    ModalFooter,
-    ModalClose,
-    MultiSelect,
-    MultiSelectTrigger,
-    MultiSelectContent,
-    MultiSelectItem,
-} from "@dlbcodes/my-design-system";
-import {
-    PhPencilSimple,
-    PhUserGear,
-    PhTrash,
-    PhPlus,
-    PhDotsThree,
-} from "@phosphor-icons/vue";
-
-interface Member {
-    id: string;
-    name: string;
-    email: string;
-    src: string | null;
-    role: "Admin" | "Member";
-    status: "Active" | "Invited";
-}
+import { Panel, PanelContent, Button } from "@dlbcodes/my-design-system";
+import { PhPlus } from "@phosphor-icons/vue";
+import type { Member } from "../../types/team";
+import MemberRow from "../../components/team/MemberRow.vue";
+import InviteMemberModal from "../../components/team/InviteMemberModal.vue";
+import ChangeRoleModal from "../../components/team/ChangeRoleModal.vue";
+import RemoveMemberModal from "../../components/team/RemoveMemberModal.vue";
 
 const members = ref<Member[]>([
     {
@@ -66,34 +35,46 @@ const members = ref<Member[]>([
     },
 ]);
 
-// Remove-confirmation modal
-const removeOpen = ref(false);
-const pendingRemove = ref<Member | null>(null);
+// Invite
+const inviteOpen = ref(false);
+const onInvite = (payload: {
+    email: string;
+    role: string;
+    teams: string[];
+}): void => {
+    // (mock) add the invited member as "Invited"
+    members.value.push({
+        id: String(Date.now()),
+        name: payload.email.split("@")[0],
+        email: payload.email,
+        src: null,
+        role: payload.role as Member["role"],
+        status: "Invited",
+    });
+};
 
+// Change role
+const roleOpen = ref(false);
+const roleTarget = ref<Member | null>(null);
+const askChangeRole = (member: Member): void => {
+    roleTarget.value = member;
+    roleOpen.value = true;
+};
+const applyRole = (member: Member, role: string): void => {
+    const m = members.value.find((x) => x.id === member.id);
+    if (m) m.role = role as Member["role"];
+};
+
+// Remove
+const removeOpen = ref(false);
+const removeTarget = ref<Member | null>(null);
 const askRemove = (member: Member): void => {
-    pendingRemove.value = member;
+    removeTarget.value = member;
     removeOpen.value = true;
 };
-
-const confirmRemove = (): void => {
-    if (pendingRemove.value) {
-        members.value = members.value.filter(
-            (m) => m.id !== pendingRemove.value!.id,
-        );
-    }
-    removeOpen.value = false;
-    pendingRemove.value = null;
+const applyRemove = (member: Member): void => {
+    members.value = members.value.filter((m) => m.id !== member.id);
 };
-
-// Invite modal with MultiSelect for teams
-const inviteOpen = ref(false);
-const inviteTeams = ref<string[]>([]);
-const teamOptions = [
-    { value: "eng", label: "Engineering" },
-    { value: "design", label: "Design" },
-    { value: "product", label: "Product" },
-    { value: "marketing", label: "Marketing" },
-];
 </script>
 
 <template>
@@ -105,137 +86,28 @@ const teamOptions = [
     </Teleport>
 
     <div class="flex flex-col gap-6">
-        <!-- Members list (hand-built rows + tokens; no Table component) -->
         <Panel class="overflow-visible">
             <PanelContent class="overflow-visible">
-                <div
+                <MemberRow
                     v-for="member in members"
                     :key="member.id"
-                    class="flex items-center gap-4 border-b border-border-subtle px-4 py-4 last:border-b-0"
-                >
-                    <Avatar :name="member.name" :src="member.src" />
-                    <div class="min-w-0 flex-1">
-                        <p
-                            class="truncate text-sm font-medium text-text-primary"
-                        >
-                            {{ member.name }}
-                        </p>
-                        <p class="truncate text-sm text-text-secondary">
-                            {{ member.email }}
-                        </p>
-                    </div>
-
-                    <Badge
-                        :variant="
-                            member.role === 'Admin' ? 'primary' : 'neutral'
-                        "
-                    >
-                        {{ member.role }}
-                    </Badge>
-                    <Badge
-                        :variant="
-                            member.status === 'Active' ? 'success' : 'pending'
-                        "
-                    >
-                        {{ member.status }}
-                    </Badge>
-
-                    <Dropdown placement="bottom-end">
-                        <DropdownTrigger>
-                            <Button
-                                variant="secondary"
-                                size="icon-sm"
-                                aria-label="Member actions"
-                            >
-                                <PhDotsThree class="size-4" />
-                            </Button>
-                        </DropdownTrigger>
-                        <DropdownContent size="xs">
-                            <DropdownItem>
-                                <PhPencilSimple class="size-4" />
-                                Edit
-                            </DropdownItem>
-                            <DropdownItem>
-                                <PhUserGear class="size-4" />
-                                Change role
-                            </DropdownItem>
-                            <DropdownItem @click="askRemove(member)">
-                                <PhTrash class="size-4" />
-                                Remove
-                            </DropdownItem>
-                        </DropdownContent>
-                    </Dropdown>
-                </div>
+                    :member="member"
+                    @change-role="askChangeRole"
+                    @remove="askRemove"
+                />
             </PanelContent>
         </Panel>
 
-        <!-- Remove confirmation -->
-        <Modal v-model="removeOpen" size="lg">
-            <ModalHeader>
-                <ModalTitle>Remove member</ModalTitle>
-                <ModalDescription>
-                    Remove {{ pendingRemove?.name }} from the team? This can't
-                    be undone.
-                </ModalDescription>
-                <ModalClose />
-            </ModalHeader>
-            <ModalFooter>
-                <Button variant="secondary" @click="removeOpen = false"
-                    >Cancel</Button
-                >
-                <Button variant="destructive" @click="confirmRemove"
-                    >Remove</Button
-                >
-            </ModalFooter>
-        </Modal>
-
-        <!-- Invite modal with MultiSelect -->
-        <Modal v-model="inviteOpen" size="lg">
-            <ModalHeader>
-                <ModalTitle>Invite a member</ModalTitle>
-                <ModalDescription
-                    >Choose which teams they'll join.</ModalDescription
-                >
-                <ModalClose />
-            </ModalHeader>
-            <ModalContent>
-                <MultiSelect
-                    v-model="inviteTeams"
-                    :options="teamOptions"
-                    placeholder="Select teams"
-                >
-                    <template
-                        #default="{ label, empty, toggleAll, allSelected }"
-                    >
-                        <MultiSelectTrigger :label="label" :empty="empty" />
-                        <MultiSelectContent>
-                            <button
-                                type="button"
-                                class="mb-1 w-full rounded-lg px-3 py-2 text-left text-sm text-text-secondary hover:bg-bg-surface"
-                                @click="toggleAll"
-                            >
-                                {{
-                                    allSelected ? "Deselect all" : "Select all"
-                                }}
-                            </button>
-                            <MultiSelectItem
-                                v-for="o in teamOptions"
-                                :key="o.value"
-                                :value="o.value"
-                                :label="o.label"
-                            />
-                        </MultiSelectContent>
-                    </template>
-                </MultiSelect>
-            </ModalContent>
-            <ModalFooter>
-                <Button variant="secondary" @click="inviteOpen = false"
-                    >Cancel</Button
-                >
-                <Button variant="primary" @click="inviteOpen = false"
-                    >Send invite</Button
-                >
-            </ModalFooter>
-        </Modal>
+        <InviteMemberModal v-model:open="inviteOpen" @invite="onInvite" />
+        <ChangeRoleModal
+            v-model:open="roleOpen"
+            :member="roleTarget"
+            @save="applyRole"
+        />
+        <RemoveMemberModal
+            v-model:open="removeOpen"
+            :member="removeTarget"
+            @confirm="applyRemove"
+        />
     </div>
 </template>
