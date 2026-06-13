@@ -56,7 +56,7 @@ const nav = [
                     <RouterLink to="/dashboard">
                         <BrandMark />
                     </RouterLink>
-                    <WorkspaceSwitcher class="w-full" />
+                    <WorkspaceSwitcher />
                 </SidebarHeader>
 
                 <SidebarContent>
