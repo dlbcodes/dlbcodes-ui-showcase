@@ -54,9 +54,13 @@ const password = ref("");
                 </FieldContent>
             </Field>
 
-            <Button variant="primary" class="w-full justify-center"
-                >Create account</Button
+            <Button
+                to="/dashboard"
+                variant="primary"
+                class="w-full justify-center"
             >
+                Create account
+            </Button>
         </div>
 
         <p class="text-center text-sm text-text-secondary">
@@ -64,8 +68,9 @@ const password = ref("");
             <RouterLink
                 to="/login"
                 class="font-medium text-brand-200 hover:underline"
-                >Sign in</RouterLink
             >
+                Sign in
+            </RouterLink>
         </p>
     </div>
 </template>

@@ -25,7 +25,7 @@ const confirm = (member: Member | null): void => {
 <template>
     <Modal
         :model-value="open"
-        size="sm"
+        size="lg"
         @update:model-value="emit('update:open', $event)"
     >
         <ModalHeader>

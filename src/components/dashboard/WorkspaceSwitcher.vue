@@ -20,6 +20,7 @@ import {
     Input,
     Button,
     Separator,
+    useSidebar,
 } from "@dlbcodes/my-design-system";
 import { PhCaretUpDown, PhCheck, PhPlus, PhGear } from "@phosphor-icons/vue";
 import { workspaces, type Workspace } from "../../data/mock";
@@ -27,10 +28,17 @@ import { workspaces, type Workspace } from "../../data/mock";
 const activeId = ref("1");
 const active = ref<Workspace>(workspaces[0]);
 
+// Inside SidebarProvider — close the mobile drawer after navigating/acting.
+const sidebar = useSidebar();
+const closeDrawer = (): void => {
+    if (sidebar.isMobile.value) sidebar.close();
+};
+
 const select = (ws: Workspace, close: () => void): void => {
     activeId.value = ws.id;
     active.value = ws;
-    close();
+    close(); // close the popover
+    closeDrawer(); // close the mobile drawer
 };
 
 const planVariant = (
@@ -134,7 +142,6 @@ const saveSettings = (): void => {
         </PopoverContent>
     </Popover>
 
-    <!-- Modal lives OUTSIDE the popover, at the component root -->
     <Modal v-model="settingsOpen" size="xl">
         <ModalHeader>
             <ModalTitle>Workspace settings</ModalTitle>
@@ -143,7 +150,7 @@ const saveSettings = (): void => {
         </ModalHeader>
         <ModalContent>
             <div class="flex flex-col gap-4">
-                <Field>
+                <Field required>
                     <FieldLabel>Workspace name</FieldLabel>
                     <FieldContent>
                         <Input

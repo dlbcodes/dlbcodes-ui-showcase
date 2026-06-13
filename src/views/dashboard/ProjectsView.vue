@@ -86,7 +86,7 @@ const createProject = (): void => {
     </Empty>
 
     <!-- Create project modal -->
-    <Modal v-model="createOpen" size="lg">
+    <Modal v-model="createOpen" size="lg" :closeOnBackdrop="false">
         <ModalHeader>
             <ModalTitle>Create a project</ModalTitle>
             <ModalDescription
@@ -96,7 +96,7 @@ const createProject = (): void => {
         </ModalHeader>
         <ModalContent>
             <div class="flex flex-col gap-4">
-                <Field>
+                <Field required>
                     <FieldLabel>Project name</FieldLabel>
                     <FieldContent>
                         <Input

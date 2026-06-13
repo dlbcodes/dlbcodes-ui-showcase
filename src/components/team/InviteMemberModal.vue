@@ -76,7 +76,7 @@ const submit = (): void => {
         </ModalHeader>
         <ModalContent>
             <div class="flex flex-col gap-4">
-                <Field>
+                <Field required>
                     <FieldLabel>Email address</FieldLabel>
                     <FieldContent>
                         <Input
