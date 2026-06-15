@@ -73,7 +73,6 @@ const nav = [
                         :to="item.path"
                         :active="isActive(item.path)"
                         :disabled="item.disabled"
-                        class="gap-2"
                     >
                         <component :is="item.icon" />
                         {{ item.label }}

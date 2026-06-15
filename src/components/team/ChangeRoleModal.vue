@@ -62,10 +62,7 @@ const save = (): void => {
                 <FieldLabel>Role</FieldLabel>
                 <FieldContent>
                     <Select v-model="role">
-                        <SelectTrigger
-                            variant="contrast"
-                            placeholder="Select a role"
-                        />
+                        <SelectTrigger placeholder="Select a role" />
                         <SelectContent>
                             <SelectItem value="Admin">Admin</SelectItem>
                             <SelectItem value="Member">Member</SelectItem>

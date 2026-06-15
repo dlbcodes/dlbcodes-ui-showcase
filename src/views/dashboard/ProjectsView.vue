@@ -101,7 +101,6 @@ const createProject = (): void => {
                     <FieldContent>
                         <Input
                             v-model="name"
-                            variant="contrast"
                             placeholder="e.g. Website redesign"
                         />
                     </FieldContent>
@@ -112,7 +111,6 @@ const createProject = (): void => {
                     <FieldContent>
                         <Textarea
                             v-model="description"
-                            variant="contrast"
                             placeholder="What's this project about?"
                         />
                         <FieldDescription
@@ -126,10 +124,7 @@ const createProject = (): void => {
                     <FieldLabel>Visibility</FieldLabel>
                     <FieldContent>
                         <Select v-model="visibility">
-                            <SelectTrigger
-                                variant="contrast"
-                                placeholder="Select visibility"
-                            />
+                            <SelectTrigger placeholder="Select visibility" />
                             <SelectContent>
                                 <SelectItem value="private">Private</SelectItem>
                                 <SelectItem value="team">Team-only</SelectItem>
@@ -151,7 +146,6 @@ const createProject = (): void => {
                                 <MultiSelectTrigger
                                     :label="label"
                                     :empty="empty"
-                                    variant="contrast"
                                 />
                                 <MultiSelectContent size="full">
                                     <MultiSelectItem

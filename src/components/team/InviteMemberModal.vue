@@ -59,6 +59,9 @@ const submit = (): void => {
     });
     emit("update:open", false);
 };
+
+const summarize = (count: number, total: number) =>
+    `${count} of ${total} teams`;
 </script>
 
 <template>
@@ -81,7 +84,6 @@ const submit = (): void => {
                     <FieldContent>
                         <Input
                             v-model="email"
-                            variant="contrast"
                             type="email"
                             placeholder="name@company.com"
                         />
@@ -92,10 +94,7 @@ const submit = (): void => {
                     <FieldLabel>Role</FieldLabel>
                     <FieldContent>
                         <Select v-model="role">
-                            <SelectTrigger
-                                variant="contrast"
-                                placeholder="Select a role"
-                            />
+                            <SelectTrigger placeholder="Select a role" />
                             <SelectContent>
                                 <SelectItem value="Admin">Admin</SelectItem>
                                 <SelectItem value="Member">Member</SelectItem>
@@ -110,6 +109,7 @@ const submit = (): void => {
                         <MultiSelect
                             v-model="teams"
                             :options="teamOptions"
+                            :summarize="summarize"
                             placeholder="Select teams"
                         >
                             <template
@@ -123,7 +123,6 @@ const submit = (): void => {
                                 <MultiSelectTrigger
                                     :label="label"
                                     :empty="empty"
-                                    variant="contrast"
                                 />
                                 <MultiSelectContent size="full">
                                     <button
