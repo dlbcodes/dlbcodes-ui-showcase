@@ -12,6 +12,7 @@ export const router = createRouter({
 			component: MarketingLayout,
 			children: [
 				// homepage will go here later as the index
+				{ path: "", name: "home", component: () => import("../views/marketing/HomeView.vue") },
 				{ path: "pricing", name: "pricing", component: () => import("../views/marketing/PricingView.vue") },
 			],
 		},

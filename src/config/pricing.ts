@@ -1,5 +1,9 @@
+import { PhPlant, PhRocket } from "@phosphor-icons/vue";
+import type { Component } from "vue";
+
 export interface PricingPlan {
 	name: string;
+	icon: Component;
 	description: string;
 	price: { monthly: number; annual: number };
 	features: string[];
@@ -15,17 +19,15 @@ export interface FAQ {
 export const plans: PricingPlan[] = [
 	{
 		name: "Free",
+		icon: PhPlant,
 		description: "For individuals getting started.",
 		price: { monthly: 0, annual: 0 },
-		features: [
-			"Up to 3 projects",
-			"Basic analytics",
-			"Community support",
-		],
+		features: ["Up to 3 projects", "Basic analytics", "Community support"],
 		cta: "Get started",
 	},
 	{
 		name: "Pro",
+		icon: PhRocket,
 		description: "For growing teams that need more.",
 		price: { monthly: 20, annual: 16 },
 		features: [

@@ -128,7 +128,6 @@ const shortcuts = [
                     <FieldContent>
                         <Input
                             v-model="subject"
-                            variant="contrast"
                             placeholder="What's this about?"
                         />
                     </FieldContent>
@@ -138,7 +137,6 @@ const shortcuts = [
                     <FieldContent>
                         <Textarea
                             v-model="message"
-                            variant="contrast"
                             placeholder="Tell us what's going on…"
                         />
                     </FieldContent>

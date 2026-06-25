@@ -8,6 +8,8 @@ import {
     FieldDescription,
     Input,
     Button,
+    Panel,
+    PanelContent,
 } from "@dlbcodes/my-design-system";
 
 const name = ref("");
@@ -18,50 +20,58 @@ const password = ref("");
 <template>
     <div class="flex flex-col gap-6">
         <div>
-            <h1 class="text-2xl font-semibold tracking-tight text-text-primary">
+            <h1
+                class="font-serif text-3xl tracking-wide font-semibold text-text-primary"
+            >
                 Create your account
             </h1>
-            <p class="mt-1 text-sm text-text-secondary">
+            <p
+                class="mt-1 font-serif text-lg tracking-wide text-text-secondary"
+            >
                 Start building in minutes.
             </p>
         </div>
 
-        <div class="flex flex-col gap-4">
-            <Field>
-                <FieldLabel>Full name</FieldLabel>
-                <FieldContent
-                    ><Input v-model="name" placeholder="Daniel Lobo"
-                /></FieldContent>
-            </Field>
-            <Field>
-                <FieldLabel>Email</FieldLabel>
-                <FieldContent
-                    ><Input
-                        v-model="email"
-                        type="email"
-                        placeholder="you@example.com"
-                /></FieldContent>
-            </Field>
-            <Field>
-                <FieldLabel>Password</FieldLabel>
-                <FieldContent>
-                    <Input
-                        v-model="password"
-                        type="password"
-                        placeholder="••••••••"
-                    />
-                    <FieldDescription>At least 8 characters.</FieldDescription>
-                </FieldContent>
-            </Field>
+        <Panel>
+            <PanelContent class="flex flex-col gap-4 p-6 md:p-12">
+                <Field>
+                    <FieldLabel>Full name</FieldLabel>
+                    <FieldContent
+                        ><Input v-model="name" placeholder="Daniel Lobo"
+                    /></FieldContent>
+                </Field>
+                <Field>
+                    <FieldLabel>Email</FieldLabel>
+                    <FieldContent
+                        ><Input
+                            v-model="email"
+                            type="email"
+                            placeholder="you@example.com"
+                    /></FieldContent>
+                </Field>
+                <Field>
+                    <FieldLabel>Password</FieldLabel>
+                    <FieldContent>
+                        <Input
+                            v-model="password"
+                            type="password"
+                            placeholder="••••••••"
+                        />
+                        <FieldDescription
+                            >At least 8 characters.</FieldDescription
+                        >
+                    </FieldContent>
+                </Field>
 
-            <Button
-                to="/dashboard"
-                variant="primary"
-                class="w-full justify-center"
-            >
-                Create account
-            </Button>
-        </div>
+                <Button
+                    to="/dashboard"
+                    variant="primary"
+                    class="w-full justify-center"
+                >
+                    Create account
+                </Button>
+            </PanelContent>
+        </Panel>
 
         <p class="text-center text-sm text-text-secondary">
             Already have an account?

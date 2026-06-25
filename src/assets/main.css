@@ -20,8 +20,6 @@
 /* ─── Lattice — your default (warm), indigo accent ─── */
 :root,
 [data-theme="lattice"] {
-    --color-brand-100: oklch(55% 0.15 265);
-    --color-brand-200: oklch(62% 0.16 265);
 }
 
 /* ─── Zinc — shadcn's cool-gray base; near monochrome ─── */

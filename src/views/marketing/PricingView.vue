@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import {
+    Label,
     Switch,
     Badge,
     Disclosure,
@@ -14,72 +15,103 @@ const annual = ref(false);
 </script>
 
 <template>
-    <div class="mx-auto max-w-6xl px-6 py-16">
-        <!-- Header -->
-        <div class="mx-auto max-w-2xl text-center">
-            <h1 class="text-4xl font-semibold tracking-tight text-text-primary">
-                Simple, transparent pricing
-            </h1>
-            <p class="mt-3 text-lg text-text-secondary">
-                Start for free. Upgrade as you grow. No hidden fees.
-            </p>
-            <div class="mt-8 flex items-center justify-center gap-3">
-                <span
-                    class="text-sm"
-                    :class="
-                        !annual ? 'text-text-primary' : 'text-text-tertiary'
-                    "
-                    >Monthly</span
+    <div class="mx-auto flex max-w-6xl flex-col gap-y-20 px-6 py-16">
+        <!-- Pricing -->
+        <section class="flex flex-col gap-y-12">
+            <!-- Header -->
+            <div class="mx-auto max-w-2xl text-center">
+                <h1
+                    class="font-serif text-4xl lg:text-5xl tracking-wide text-text-primary"
                 >
-                <Switch v-model="annual" />
-                <span
-                    class="text-sm"
-                    :class="annual ? 'text-text-primary' : 'text-text-tertiary'"
-                    >Annual</span
+                    Simple, transparent pricing
+                </h1>
+                <p
+                    class="mt-1 font-serif text-lg md:text-xl tracking-wide text-text-secondary"
                 >
-                <Badge variant="success">Save 20%</Badge>
-            </div>
-        </div>
+                    Start for free. Upgrade as you grow. No hidden fees.
+                </p>
 
-        <!-- Two plans, side by side -->
-        <div
-            class="mx-auto mt-12 grid max-w-3xl grid-cols-1 items-stretch gap-6 md:grid-cols-2"
-        >
-            <PricingCard
-                v-for="plan in plans"
-                :key="plan.name"
-                :plan="plan"
-                :annual="annual"
-            />
-        </div>
+                <!-- Billing toggle -->
+                <div class="mt-8 flex items-center justify-center gap-3">
+                    <Label
+                        for="pricing"
+                        :class="
+                            annual ? 'text-text-tertiary' : 'text-text-primary'
+                        "
+                    >
+                        Monthly
+                    </Label>
+                    <Switch v-model="annual" id="pricing" />
+                    <Label
+                        for="pricing"
+                        :class="
+                            annual ? 'text-text-primary' : 'text-text-tertiary'
+                        "
+                    >
+                        Annual
+                    </Label>
+
+                    <Badge variant="success">Save 20%</Badge>
+                </div>
+                <!-- End Billing toggle -->
+            </div>
+            <!-- End Header -->
+
+            <!-- Plans -->
+            <div
+                class="mx-auto grid w-full max-w-3xl grid-cols-1 items-stretch gap-6 md:grid-cols-2"
+            >
+                <PricingCard
+                    v-for="plan in plans"
+                    :key="plan.name"
+                    :plan="plan"
+                    :annual="annual"
+                />
+            </div>
+            <!-- End Plans -->
+        </section>
+        <!-- End Pricing -->
 
         <!-- FAQ -->
-        <div class="mx-auto mt-24 max-w-2xl">
-            <h2
-                class="text-center text-2xl font-semibold tracking-tight text-text-primary"
-            >
-                Frequently asked questions
-            </h2>
-            <div class="mt-8 flex flex-col">
+        <section class="mx-auto flex w-full max-w-3xl flex-col gap-y-8">
+            <!-- Header -->
+            <div class="text-center">
+                <h2
+                    class="font-serif text-3xl md:text-4xl tracking-wide text-text-primary"
+                >
+                    Frequently asked questions
+                </h2>
+                <p
+                    class="mt-1 font-serif text-lg tracking-wide text-text-secondary"
+                >
+                    Everything else you might be wondering.
+                </p>
+            </div>
+            <!-- End Header -->
+
+            <!-- Questions -->
+            <div class="flex flex-col">
                 <div
                     v-for="faq in faqs"
                     :key="faq.question"
                     class="border-b border-border-subtle"
                 >
                     <Disclosure>
-                        <DisclosureTrigger>{{
-                            faq.question
-                        }}</DisclosureTrigger>
-                        <DisclosureContent>
-                            <p
-                                class="pb-4 text-sm leading-relaxed text-text-secondary"
-                            >
-                                {{ faq.answer }}
-                            </p>
+                        <DisclosureTrigger
+                            class="font-serif text-lg tracking-wide"
+                        >
+                            {{ faq.question }}
+                        </DisclosureTrigger>
+                        <DisclosureContent
+                            class="pb-4 text-sm leading-relaxed text-text-secondary"
+                        >
+                            {{ faq.answer }}
                         </DisclosureContent>
                     </Disclosure>
                 </div>
             </div>
-        </div>
+            <!-- End Questions -->
+        </section>
+        <!-- End FAQ -->
     </div>
 </template>

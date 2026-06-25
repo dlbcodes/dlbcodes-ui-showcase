@@ -155,7 +155,6 @@ const saveSettings = (): void => {
                     <FieldContent>
                         <Input
                             v-model="workspaceName"
-                            variant="contrast"
                             placeholder="Workspace name"
                         />
                     </FieldContent>

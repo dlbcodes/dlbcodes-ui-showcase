@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import BrandMark from "../BrandMark.vue";
-import ThemeSwitcher from "../ThemeSwitcher.vue";
 import { Button } from "@dlbcodes/my-design-system";
 import { marketingNav } from "../../config/nav.ts";
 import { Panel, PanelHeader, PanelContent } from "@dlbcodes/my-design-system";
@@ -17,11 +16,11 @@ import { Panel, PanelHeader, PanelContent } from "@dlbcodes/my-design-system";
             >
                 This is a small message
             </PanelHeader>
-            <PanelContent
-                class="flex justify-between items-center p-3 overflow-visible"
-            >
-                <RouterLink to="/"><BrandMark /></RouterLink>
-                <nav class="hidden items-center gap-8 md:flex">
+            <PanelContent class="flex items-center p-3 overflow-visible">
+                <RouterLink to="/" class="flex-1"><BrandMark /></RouterLink>
+                <nav
+                    class="hidden items-center gap-8 md:flex md:flex-1 justify-center"
+                >
                     <RouterLink
                         v-for="item in marketingNav"
                         :key="item.href"
@@ -31,8 +30,7 @@ import { Panel, PanelHeader, PanelContent } from "@dlbcodes/my-design-system";
                         {{ item.label }}
                     </RouterLink>
                 </nav>
-                <div class="flex items-center gap-2">
-                    <ThemeSwitcher />
+                <div class="flex flex-1 items-center justify-end gap-2">
                     <RouterLink to="/login">
                         <Button variant="secondary" size="sm">Sign in</Button>
                     </RouterLink>
