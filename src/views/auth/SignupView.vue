@@ -8,9 +8,11 @@ import {
     FieldDescription,
     Input,
     Button,
+    Separator,
     Panel,
     PanelContent,
 } from "@dlbcodes/my-design-system";
+import { PhGoogleLogo, PhGithubLogo } from "@phosphor-icons/vue";
 
 const name = ref("");
 const email = ref("");
@@ -21,7 +23,7 @@ const password = ref("");
     <div class="flex flex-col gap-6">
         <div>
             <h1
-                class="font-serif text-3xl tracking-wide font-semibold text-text-primary"
+                class="font-serif text-3xl font-semibold tracking-wide text-text-primary"
             >
                 Create your account
             </h1>
@@ -33,43 +35,65 @@ const password = ref("");
         </div>
 
         <Panel>
-            <PanelContent class="flex flex-col gap-4 p-6 md:p-12">
-                <Field>
-                    <FieldLabel>Full name</FieldLabel>
-                    <FieldContent
-                        ><Input v-model="name" placeholder="Daniel Lobo"
-                    /></FieldContent>
-                </Field>
-                <Field>
-                    <FieldLabel>Email</FieldLabel>
-                    <FieldContent
-                        ><Input
-                            v-model="email"
-                            type="email"
-                            placeholder="you@example.com"
-                    /></FieldContent>
-                </Field>
-                <Field>
-                    <FieldLabel>Password</FieldLabel>
-                    <FieldContent>
-                        <Input
-                            v-model="password"
-                            type="password"
-                            placeholder="••••••••"
-                        />
-                        <FieldDescription
-                            >At least 8 characters.</FieldDescription
-                        >
-                    </FieldContent>
-                </Field>
+            <PanelContent
+                class="flex flex-col gap-y-4 py-6 px-8 md:px-12 md:py-8"
+            >
+                <div class="flex flex-col gap-2">
+                    <Button variant="secondary" class="w-full justify-center">
+                        <PhGoogleLogo class="size-4" aria-hidden="true" />
+                        Continue with Google
+                    </Button>
+                    <Button variant="secondary" class="w-full justify-center">
+                        <PhGithubLogo class="size-4" aria-hidden="true" />
+                        Continue with GitHub
+                    </Button>
+                </div>
 
-                <Button
-                    to="/dashboard"
-                    variant="primary"
-                    class="w-full justify-center"
-                >
-                    Create account
-                </Button>
+                <div class="flex items-center gap-3">
+                    <Separator class="flex-1" />
+                    <span class="text-xs text-text-tertiary">or</span>
+                    <Separator class="flex-1" />
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <Field>
+                        <FieldLabel>Full name</FieldLabel>
+                        <FieldContent>
+                            <Input v-model="name" placeholder="Daniel L" />
+                        </FieldContent>
+                    </Field>
+                    <Field>
+                        <FieldLabel>Email</FieldLabel>
+                        <FieldContent>
+                            <Input
+                                v-model="email"
+                                type="email"
+                                placeholder="you@example.com"
+                            />
+                        </FieldContent>
+                    </Field>
+                    <Field>
+                        <FieldLabel>Password</FieldLabel>
+                        <FieldContent>
+                            <Input
+                                v-model="password"
+                                type="password"
+                                placeholder="••••••••"
+                            />
+                            <FieldDescription>
+                                At least 8 characters.
+                            </FieldDescription>
+                        </FieldContent>
+                    </Field>
+
+                    <Button
+                        to="/dashboard"
+                        variant="primary"
+                        class="w-full justify-center"
+                    >
+                        Create account
+                    </Button>
+                </div>
             </PanelContent>
         </Panel>
 

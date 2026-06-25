@@ -4,6 +4,7 @@ import BrandMark from "../BrandMark.vue";
 import { Button } from "@dlbcodes/my-design-system";
 import { marketingNav } from "../../config/nav.ts";
 import { Panel, PanelHeader, PanelContent } from "@dlbcodes/my-design-system";
+import { PhMegaphone } from "@phosphor-icons/vue";
 </script>
 
 <template>
@@ -12,8 +13,13 @@ import { Panel, PanelHeader, PanelContent } from "@dlbcodes/my-design-system";
     >
         <Panel class="overflow-visible">
             <PanelHeader
-                class="flex justify-center items-center text-xs font-mono"
+                class="flex items-center justify-center gap-2 text-xs text-text-secondary"
             >
+                <PhMegaphone
+                    class="size-4 shrink-0"
+                    weight="thin"
+                    aria-hidden="true"
+                />
                 New: Pro now includes team licensing.
             </PanelHeader>
             <PanelContent class="flex items-center p-3 overflow-visible">
