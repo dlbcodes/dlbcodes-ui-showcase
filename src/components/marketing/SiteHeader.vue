@@ -14,7 +14,7 @@ import { Panel, PanelHeader, PanelContent } from "@dlbcodes/my-design-system";
             <PanelHeader
                 class="flex justify-center items-center text-xs font-mono"
             >
-                This is a small message
+                New: Pro now includes team licensing.
             </PanelHeader>
             <PanelContent class="flex items-center p-3 overflow-visible">
                 <RouterLink to="/" class="flex-1"><BrandMark /></RouterLink>
