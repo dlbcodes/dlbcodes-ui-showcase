@@ -56,26 +56,26 @@ const features = [
             <div class="flex flex-col items-center gap-y-3">
                 <Badge>Open Source</Badge>
                 <h1
-                    class="max-w-3xl font-serif text-5xl tracking-wide text-text-primary"
+                    class="max-w-3xl font-serif text-4xl md:text-5xl tracking-wide text-text-primary text-balance"
                 >
                     A Vue 3 component library you theme with your own tokens
                 </h1>
                 <p
-                    class="mt-1 max-w-xl font-serif text-2xl tracking-wide text-text-secondary"
+                    class="mt-1 max-w-3xl font-serif text-2xl tracking-wide text-text-secondary text-balance"
                 >
                     Accessible, composable components. Change one set of design
                     tokens and the whole system restyles.
                 </p>
             </div>
             <div class="flex items-center gap-x-4">
-                <Button variant="secondary">View components</Button>
-                <Button variant="primary">Get started</Button>
+                <Button to="/login" variant="secondary">View components</Button>
+                <Button to="/signup" variant="primary">Get started</Button>
             </div>
         </div>
         <!-- End Hero -->
 
         <!-- Features -->
-        <div class="flex flex-col gap-y-10">
+        <div id="features" class="flex flex-col gap-y-10">
             <!-- Features header -->
             <div class="text-center">
                 <h2

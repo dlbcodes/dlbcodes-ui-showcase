@@ -91,24 +91,16 @@ const annual = ref(false);
 
             <!-- Questions -->
             <div class="flex flex-col">
-                <div
-                    v-for="faq in faqs"
-                    :key="faq.question"
-                    class="border-b border-border-subtle"
-                >
-                    <Disclosure>
-                        <DisclosureTrigger
-                            class="font-serif text-lg tracking-wide"
-                        >
-                            {{ faq.question }}
-                        </DisclosureTrigger>
-                        <DisclosureContent
-                            class="pb-4 text-sm leading-relaxed text-text-secondary"
-                        >
-                            {{ faq.answer }}
-                        </DisclosureContent>
-                    </Disclosure>
-                </div>
+                <Disclosure v-for="faq in faqs" :key="faq.question">
+                    <DisclosureTrigger class="font-serif text-xl tracking-wide">
+                        {{ faq.question }}
+                    </DisclosureTrigger>
+                    <DisclosureContent
+                        class="text-base leading-relaxed text-text-secondary"
+                    >
+                        {{ faq.answer }}
+                    </DisclosureContent>
+                </Disclosure>
             </div>
             <!-- End Questions -->
         </section>

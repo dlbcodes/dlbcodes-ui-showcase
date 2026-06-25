@@ -35,4 +35,14 @@ export const router = createRouter({
 			],
 		},
 	],
+	scrollBehavior(to) {
+		if (to.hash) {
+			return {
+				el: to.hash,
+				behavior: "smooth",
+				top: 128,
+			};
+		}
+		return { top: 0 };
+	},
 });
